@@ -25,7 +25,7 @@
 
 > We will type this in terminal
 
-    git clone https://github.com/uturuncoglu/RegESM.git
+    git clone https://github.com/asfandiyar007/RegESM.git
     cd $PROGS
     cd RegESM
     sudo chmod +x install-deps.sh
