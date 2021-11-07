@@ -20,6 +20,7 @@
     sudo apt-get install gfortran
 
 ----------------- **Installation Method Step by Step** ----------
+
 **Step (2):** Clone the official Repo of RegESM 
 
 > We will type this in terminal
@@ -30,11 +31,13 @@
     sudo chmod +x install-deps.sh
 
 **Step(3):** Go to *RegESM folder*
- ![RegESM folder](https://github.com/asfandiyar007/RegESM/blob/master/Images/Screenshot%20from%202021-11-07%2023-38-51.png)![Changing Username](https://github.com/asfandiyar007/RegESM/blob/master/Images/Screenshot%20from%202021-11-07%2023-39-34.png)
+ ![RegESM folder](https://github.com/asfandiyar007/RegESM/blob/master/Images/Screenshot%20from%202021-11-07%2023-38-51.png) 
+**Step(4):** change your username and press save.
+ ![Changing Username](https://github.com/asfandiyar007/RegESM/blob/master/Images/Screenshot%20from%202021-11-07%2023-39-34.png)
 
 > If you don't know your username type this in terminal `whoami`
 
-**Step (4):** Open another terminal and type below 
+**Step (5):** Open another terminal and type below 
 
     sudo -i 
 
