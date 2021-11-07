@@ -5,14 +5,18 @@ PROGS=$1
 OCN_LINK=$2
 RTM_LINK=$3
 WAV_LINK=$4
+#---------->>>>> Kindly set Username Below otherwise Errors<<<<<<--------------
 
+user_name="sapna" 
+
+#========================
 # parameters
 ZLIB_VER="1.2.8"
 HDF5_VER="1.8.16"
 NCCC_VER="4.4.0"
 NCXX_VER="4.2"
 NCFC_VER="4.4.3"
-XERC_VER="3.1.4"
+XERC_VER="3.2.3"
 OMPI_VER="1.10.2"
 ESMF_VER="7_0_0"
 
@@ -29,46 +33,46 @@ export CXX=$CXX
 gcc -march=native -Q --help=target
 
 # install zlib
-cd ${PROGS}
+cd ${PROGS}/home/${user_name}/
 wget "https://github.com/madler/zlib/archive/v${ZLIB_VER}.tar.gz"
 tar -zxvf v${ZLIB_VER}.tar.gz > extract.log
 rm -f v${ZLIB_VER}.tar.gz
 cd zlib-${ZLIB_VER}
-./configure --prefix=${PROGS}/zlib-${ZLIB_VER}
+./configure --prefix=${PROGS}/home/${user_name}/zlib-${ZLIB_VER}
 make > make.log 
 make install >> make.log
 cd -
-mv extract.log ${PROGS}/zlib-${ZLIB_VER}/.
+mv extract.log ${PROGS}/home/${user_name}/zlib-${ZLIB_VER}/.
 
-export ZLIB=${PROGS}/zlib-${ZLIB_VER}
-export LD_LIBRARY_PATH=${PROGS}/zlib-${ZLIB_VER}/lib:${LD_LIBRARY_PATH}
+export ZLIB=${PROGS}/home/${user_name}/zlib-${ZLIB_VER}
+export LD_LIBRARY_PATH=${PROGS}/home/${user_name}/zlib-${ZLIB_VER}/lib:${LD_LIBRARY_PATH}
 
 # install hdf5
-cd ${PROGS}
-wget "https://www.hdfgroup.org/ftp/HDF5/releases/hdf5-${HDF5_VER}/src/hdf5-${HDF5_VER}.tar.gz" 
+cd ${PROGS}/home/${user_name}/
+wget "https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.8/hdf5-${HDF5_VER}/src/hdf5-${HDF5_VER}.tar.gz" 
 tar -zxvf hdf5-${HDF5_VER}.tar.gz > extract.log
 rm -f hdf5-${HDF5_VER}.tar.gz
-cd hdf5-${HDF5_VER}
-./configure --prefix=${PROGS}/hdf5-${HDF5_VER} --with-zlib=${PROGS}/zlib-${ZLIB_VER} --enable-fortran --enable-cxx CC=${CC} FC=${FC} CXX=${CXX}
-make > make.log
+cd /home/${user_name}/hdf5-${HDF5_VER}
+./configure --prefix=${PROGS}/home/${user_name}/hdf5-${HDF5_VER} --with-zlib=${PROGS}/home/${user_name}/zlib-${ZLIB_VER} --enable-fortran --enable-cxx CC=${CC} FC=${FC} CXX=${CXX}
+make -i > make.log
 make install >> make.log
 cd -
-mv extract.log ${PROGS}/hdf5-${HDF5_VER}/.
+mv extract.log ${PROGS}/home/${user_name}/hdf5-${HDF5_VER}/.
 
-export HDF5=${PROGS}/hdf5-${HDF5_VER}
+export HDF5=${PROGS}/home/${user_name}/hdf5-${HDF5_VER}
 export PATH=${HDF5}/bin:${PATH}
 export LD_LIBRARY_PATH=${HDF5}/lib:${LD_LIBRARY_PATH}
 
 # install netcdf c
-cd ${PROGS}
+cd ${PROGS}/home/${user_name}/
 mkdir netcdf-${NCCC_VER}
-cd netcdf-${NCCC_VER}
+cd /home/${user_name}/netcdf-${NCCC_VER}
 wget "ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-${NCCC_VER}.tar.gz"
 tar -zxvf netcdf-${NCCC_VER}.tar.gz > extract.log
 rm -f netcdf-${NCCC_VER}.tar.gz
 mv netcdf-${NCCC_VER} src
 cd src
-./configure --prefix=${PROGS}/netcdf-${NCCC_VER} CC=${CC} FC=${FC} LDFLAGS="-L${PROGS}/zlib-${ZLIB_VER}/lib -L${PROGS}/hdf5-${HDF5_VER}/lib" CPPFLAGS="-I${PROGS}/zlib-${ZLIB_VER}/include -I${PROGS}/hdf5-${HDF5_VER}/include"
+./configure --prefix=${PROGS}/home/${user_name}/netcdf-${NCCC_VER} CC=${CC} FC=${FC} LDFLAGS="-L${PROGS}/home/${user_name}/zlib-${ZLIB_VER}/lib -L${PROGS}/home/${user_name}/hdf5-${HDF5_VER}/lib" CPPFLAGS="-I${PROGS}/home/${user_name}/zlib-${ZLIB_VER}/include -I${PROGS}/home/${user_name}/hdf5-${HDF5_VER}/include"
 make > make.log
 make install >> make.log
 
@@ -77,86 +81,85 @@ export PATH=${NETCDF}/bin:${PATH}
 export LD_LIBRARY_PATH=${NETCDF}/lib:${LD_LIBRARY_PATH}
 
 # install netcdf c++
-cd ${PROGS}
+cd ${PROGS}/home/${user_name}/
 mkdir netcdf-cxx-${NCXX_VER}
-cd netcdf-cxx-${NCXX_VER}
+cd /home/${user_name}/netcdf-cxx-${NCXX_VER}
 wget "ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-cxx-${NCXX_VER}.tar.gz"
 tar -zxvf netcdf-cxx-${NCXX_VER}.tar.gz > extract.log
 rm -f netcdf-cxx-${NCXX_VER}.tar.gz
 mv netcdf-cxx-${NCXX_VER} src
 cd src
-./configure --prefix=${PROGS}/netcdf-cxx-${NCXX_VER} CC=${CC} CXX=${CXX} LDFLAGS="-L${PROGS}/zlib-${ZLIB_VER}/lib -L${PROGS}/hdf5-${HDF5_VER}/lib -L${PROGS}/netcdf-${NCCC_VER}/lib" CPPFLAGS="-I${PROGS}/zlib-${ZLIB_VER}/include -I${PROGS}/hdf5-${HDF5_VER}/include -I${PROGS}/netcdf-${NCCC_VER}/include"
+./configure --prefix=${PROGS}/home/${user_name}/netcdf-cxx-${NCXX_VER} CC=${CC} CXX=${CXX} LDFLAGS="-L${PROGS}/home/${user_name}/zlib-${ZLIB_VER}/lib -L${PROGS}/home/${user_name}/hdf5-${HDF5_VER}/lib -L${PROGS}/netcdf-${NCCC_VER}/lib" CPPFLAGS="-I${PROGS}/home/${user_name}/zlib-${ZLIB_VER}/include -I${PROGS}/home/${user_name}/hdf5-${HDF5_VER}/include -I${PROGS}/home/${user_name}/netcdf-${NCCC_VER}/include"
 make > make.log
 make install >> make.log
 
 # install netcdf fortran
-cd ${PROGS} 
+cd ${PROGS}/home/${user_name}/ 
 mkdir netcdf-fortran-${NCFC_VER}
-cd netcdf-fortran-${NCFC_VER}
+cd /home/${user_name}/netcdf-fortran-${NCFC_VER}
 wget "ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-${NCFC_VER}.tar.gz"
 tar -zxvf netcdf-fortran-${NCFC_VER}.tar.gz > extract.log
 rm -f netcdf-fortran-${NCFC_VER}.tar.gz
 mv netcdf-fortran-${NCFC_VER} src 
 cd src
-./configure --prefix=${PROGS}/netcdf-fortran-${NCFC_VER} CC=${CC} FC=${FC} LDFLAGS="-L${PROGS}/zlib-${ZLIB_VER}/lib -L${PROGS}/hdf5-${HDF5_VER}/lib -L${PROGS}/netcdf-${NCCC_VER}/lib" CPPFLAGS="-I${PROGS}/zlib-${ZLIB_VER}/include -I${PROGS}/hdf5-${HDF5_VER}/include -I${PROGS}/netcdf-${NCCC_VER}/include"
+./configure --prefix=${PROGS}/home/${user_name}/netcdf-fortran-${NCFC_VER} CC=${CC} FC=${FC} LDFLAGS="-L${PROGS}/home/${user_name}/zlib-${ZLIB_VER}/lib -L${PROGS}/home/${user_name}/hdf5-${HDF5_VER}/lib -L${PROGS}/home/${user_name}/netcdf-${NCCC_VER}/lib" CPPFLAGS="-I${PROGS}/home/${user_name}/zlib-${ZLIB_VER}/include -I${PROGS}/home/${user_name}/hdf5-${HDF5_VER}/include -I${PROGS}/home/${user_name}/netcdf-${NCCC_VER}/include"
 make > make.log
 make install >> make.log
 
-# link netcdf c++ and fortran to c
-cd ${PROGS}/netcdf-${NCCC_VER}/bin
+#link netcdf c++ and fortran to c
+cd ${PROGS}/home/${user_name}/netcdf-${NCCC_VER}/bin
 ln -s ../../netcdf-fortran-${NCFC_VER}/bin/* .
-cd ${PROGS}/netcdf-${NCCC_VER}/lib
+cd ${PROGS}/home/${user_name}/netcdf-${NCCC_VER}/lib
 ln -s ../../netcdf-cxx-${NCXX_VER}/lib/* .
 rm -rf pkgconfig
 ln -s ../../netcdf-fortran-${NCFC_VER}/lib/* .
-cd ${PROGS}/netcdf-${NCCC_VER}/include
+cd ${PROGS}/home/${user_name}/netcdf-${NCCC_VER}/include
 ln -s ../../netcdf-cxx-${NCXX_VER}/include/* .
 ln -s ../../netcdf-fortran-${NCFC_VER}/include/* .
 
 # install xerces
-cd ${PROGS}
+cd ${PROGS}/home/${user_name}/
 wget "http://ftp.itu.edu.tr/Mirror/Apache//xerces/c/3/sources/xerces-c-${XERC_VER}.tar.gz"
 tar -zxvf xerces-c-${XERC_VER}.tar.gz > extract.log
 rm -f xerces-c-${XERC_VER}.tar.gz
-cd xerces-c-${XERC_VER}
-./configure --prefix=${PROGS}/xerces-c-${XERC_VER} CC=${CC} CXX=${CXX}
+cd /home/${user_name}/xerces-c-${XERC_VER}
+./configure --prefix=${PROGS}/home/${user_name}/xerces-c-${XERC_VER} CC=${CC} CXX=${CXX}
 make > make.log
 make install >> make.log
 cd -
-mv extract.log ${PROGS}/xerces-c-${XERC_VER}/.
+mv extract.log ${PROGS}/home/${user_name}/xerces-c-${XERC_VER}/.
 
-export XERCES=${PROGS}/xerces-c-${XERC_VER}
+export XERCES=${PROGS}/home/${user_name}/xerces-c-${XERC_VER}
 export LD_LIBRARY_PATH=${XERCES}/lib:${LD_LIBRARY_PATH}
 
 # install openmpi
-cd ${PROGS}
+cd ${PROGS}/home/${user_name}/
 wget --no-check-certificate "https://www.open-mpi.org/software/ompi/v1.10/downloads/openmpi-${OMPI_VER}.tar.gz"
 tar -zxvf openmpi-${OMPI_VER}.tar.gz > extract.log
 rm -f openmpi-${OMPI_VER}.tar.gz
-cd openmpi-${OMPI_VER}
-./configure --prefix=${PROGS}/openmpi-${OMPI_VER} CC=${CC} CXX=${CXX} FC=${FC}
+cd /home/${user_name}/openmpi-${OMPI_VER}
+./configure --prefix=${PROGS}/home/${user_name}/openmpi-${OMPI_VER} CC=${CC} CXX=${CXX} FC=${FC}
 make > make.log
 make install >> make.log
 cd -
-mv extract.log ${PROGS}/openmpi-${OMPI_VER}/.
+mv extract.log ${PROGS}/home/${user_name}/openmpi-${OMPI_VER}/.
 
-export PATH=${PROGS}/openmpi-${OMPI_VER}/bin:${PATH}
-export LD_LIBRARY_PATH=${PROGS}/openmpi-${OMPI_VER}/lib:${LD_LIBRARY_PATH}
-
+export PATH=${PROGS}/home/${user_name}/openmpi-${OMPI_VER}/bin:${PATH}
+export LD_LIBRARY_PATH=${PROGS}/home/${user_name}/openmpi-${OMPI_VER}/lib:${LD_LIBRARY_PATH}
 # install esmf
-cd ${PROGS}
+cd ${PROGS}/home/${user_name}/
 wget --no-check-certificate "https://sourceforge.net/projects/esmf/files/ESMF_${ESMF_VER}/esmf_${ESMF_VER}_src.tar.gz"
 tar -zxvf esmf_${ESMF_VER}_src.tar.gz > extract.log
 rm -f esmf_${ESMF_VER}_src.tar.gz
-mv esmf esmf-${ESMF_VER//_/.}
-cd esmf-${ESMF_VER//_/.}  
+mv esmf /home/${user_name}/esmf-${ESMF_VER//_/.} 
+cd /home/${user_name}/esmf-${ESMF_VER//_/.}  
+export ESMF_DIR=/home/${user_name}/esmf-7.0.0
+export ESMF_INSTALL_PREFIX=${PROGS}/home/${user_name}/esmf-${ESMF_VER//_/.}/install_dir
 export ESMF_OS=Linux
 export ESMF_TESTMPMD=OFF
 export ESMF_TESTHARNESS_ARRAY=RUN_ESMF_TestHarnessArray_default
 export ESMF_TESTHARNESS_FIELD=RUN_ESMF_TestHarnessField_default
-export ESMF_DIR=${PROGS}/esmf-${ESMF_VER//_/.}
 export ESMF_TESTWITHTHREADS=OFF
-export ESMF_INSTALL_PREFIX=${PROGS}/esmf-${ESMF_VER//_/.}/install_dir
 export ESMF_COMM=openmpi
 export ESMF_TESTEXHAUSTIVE=ON
 export ESMF_BOPT=O
@@ -179,26 +182,26 @@ export ESMF_LIB=${ESMF_INSTALL_PREFIX}/lib/lib${ESMF_BOPT}/${ESMF_OS}.${ESMF_COM
 make info >> make.log
 make >> make.log
 make install >> make.log
-cd ${PROGS}
-mv extract.log ${PROGS}/esmf-${ESMF_VER//_/.}/.
+cd ${PROGS}/home/${user_name}/
+mv extract.log ${PROGS}/home/${user_name}/esmf-${ESMF_VER//_/.}/.
 
 # create file for environment variables
-cd ${PROGS}
+cd ${PROGS}/home/${user_name}/
 echo "export CC=$CC" > env_progs
 echo "export FC=$FC" >> env_progs
 echo "export CXX=$CXX" >> env_progs
 echo "export PROGS=${PROGS}" >> env_progs
-echo "export ZLIB=${PROGS}/zlib-${ZLIB_VER}" >> env_progs
-echo "export HDF5=${PROGS}/hdf5-${HDF5_VER}" >> env_progs
-echo "export NETCDF=${PROGS}/netcdf-${NCCC_VER}" >> env_progs
-echo "export XERCES=${PROGS}/xerces-c-${XERC_VER}" >> env_progs
+echo "export ZLIB=${PROGS}/home/${user_name}/zlib-${ZLIB_VER}" >> env_progs
+echo "export HDF5=${PROGS}/home/${user_name}/hdf5-${HDF5_VER}" >> env_progs
+echo "export NETCDF=${PROGS}/home/${user_name}/netcdf-${NCCC_VER}" >> env_progs
+echo "export XERCES=${PROGS}/home/${user_name}/xerces-c-${XERC_VER}" >> env_progs
 echo "export ESMF_OS=Linux" >> env_progs
 echo "export ESMF_TESTMPMD=OFF" >> env_progs
 echo "export ESMF_TESTHARNESS_ARRAY=RUN_ESMF_TestHarnessArray_default" >> env_progs
 echo "export ESMF_TESTHARNESS_FIELD=RUN_ESMF_TestHarnessField_default" >> env_progs
 echo "export ESMF_DIR=${PROGS}/esmf-${ESMF_VER//_/.}" >> env_progs
 echo "export ESMF_TESTWITHTHREADS=OFF" >> env_progs
-echo "export ESMF_INSTALL_PREFIX=${PROGS}/esmf-${ESMF_VER//_/.}/install_dir" >> env_progs
+echo "export ESMF_INSTALL_PREFIX=${PROGS}/home/${user_name}/esmf-${ESMF_VER//_/.}/install_dir" >> env_progs
 echo "export ESMF_COMM=openmpi" >> env_progs
 echo "export ESMF_TESTEXHAUSTIVE=ON" >> env_progs
 echo "export ESMF_BOPT=O" >> env_progs
