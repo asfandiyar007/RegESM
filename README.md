@@ -8,7 +8,7 @@
 |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--|
 |                                                                                                                                                                                    |  |
 
-**step (1):** Type below commands in terminal and we will call this terminal in this Notebook
+**step (1):** Type below commands in terminal 
 
 **---------------**Install these before anything**--------------**
 
