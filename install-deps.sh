@@ -7,7 +7,7 @@ RTM_LINK=$3
 WAV_LINK=$4
 #---------->>>>> Kindly set Username Below otherwise Errors<<<<<<--------------
 
-user_name="sapna" 
+user_name="rippler"
 
 #========================
 # parameters
