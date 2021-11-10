@@ -30,24 +30,17 @@
     cd RegESM
     sudo chmod +x install-deps.sh
 
-**Step(3):** Go to *RegESM folder*
- ![RegESM folder](https://github.com/asfandiyar007/RegESM/blob/master/Images/Screenshot%20from%202021-11-07%2023-38-51.png) 
-**Step(4):** change your username and press save.
- ![Changing Username](https://github.com/asfandiyar007/RegESM/blob/master/Images/Screenshot%20from%202021-11-07%2023-39-34.png)
-
 > If you don't know your username type this in terminal `whoami`
 
-**Step (5):** Open another terminal and type below 
+**Step (3):** Open another terminal and type below 
 
     sudo -i 
 
 > It will ask for password so enter the password
+- [ ] **change the /username to what your computer username is in above code**
 
     cd /home/username/RegESM 
-
- - [ ] **change the /username to what your computer username is in above code**
  
-
 > For example: mine was `cd /home/rippler/RegESM`
 
 **Step (6):** Run the Script by typing below
