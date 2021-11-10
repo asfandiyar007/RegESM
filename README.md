@@ -39,8 +39,8 @@
 > It will ask for password so enter the password
 - [ ] **change the /username to what your computer username is in Below code**
 
-    cd /home/username/RegESM 
- 
+    cd /home/username/RegESM  
+
 > For example: mine was `cd /home/rippler/RegESM`
 
 **Step (6):** Run the Script by typing below
@@ -48,7 +48,7 @@
     sudo ./install-deps.sh  
 
 --------------------------------------------------------------
- that's it all done now wait and see if you get any errors  
+ Now environmet is ready for RegESM ENJOY!!!!  
 -------------------------------------------------------------
 
 
