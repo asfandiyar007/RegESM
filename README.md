@@ -36,7 +36,6 @@
 
     sudo -i 
 
-> It will ask for password so enter the password
 - [ ] **change the /username to what your computer username is in Below code**
 
     cd /home/username/RegESM  
