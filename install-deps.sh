@@ -104,7 +104,7 @@ cd src
 make > make.log
 make install >> make.log
 
- link netcdf c++ and fortran to c
+#link netcdf c++ and fortran to c
 cd ${PROGS}/netcdf-${NCCC_VER}/bin
 ln -s ../../netcdf-fortran-${NCFC_VER}/bin/* .
 cd ${PROGS}/netcdf-${NCCC_VER}/lib
