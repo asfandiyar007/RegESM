@@ -11,10 +11,10 @@ WAV_LINK=$4
 # parameters
 ZLIB_VER="1.2.8"
 HDF5_VER="1.8.16"
-NCCC_VER="4.4.0"
-NCXX_VER="4.2"
-NCFC_VER="4.4.3"
-XERC_VER="3.2.3"
+NCCC_VER="c-4.9.2"
+NCXX_VER="cxx4-4.3.1"
+NCFC_VER="4.6.1"
+XERC_VER="3.2.5"
 OMPI_VER="1.10.2"
 ESMF_VER="7_0_0"
 
@@ -65,10 +65,11 @@ export LD_LIBRARY_PATH=${HDF5}/lib:${LD_LIBRARY_PATH}
 cd ${PROGS}
 mkdir netcdf-${NCCC_VER}
 cd netcdf-${NCCC_VER}
-wget "ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-${NCCC_VER}.tar.gz"
+wget "https://downloads.unidata.ucar.edu/netcdf-c/4.9.2/netcdf-${NCCC_VER}.tar.gz"
 tar -zxvf netcdf-${NCCC_VER}.tar.gz > extract.log
 rm -f netcdf-${NCCC_VER}.tar.gz
-mv netcdf-${NCCC_VER} src
+mkdir src
+mv * !src src/
 cd src
 ./configure --prefix=${PROGS}/netcdf-${NCCC_VER} CC=${CC} FC=${FC} LDFLAGS="-L${PROGS}/zlib-${ZLIB_VER}/lib -L${PROGS}/hdf5-${HDF5_VER}/lib" CPPFLAGS="-I${PROGS}/zlib-${ZLIB_VER}/include -I${PROGS}/hdf5-${HDF5_VER}/include"
 make > make.log
@@ -80,14 +81,15 @@ export LD_LIBRARY_PATH=${NETCDF}/lib:${LD_LIBRARY_PATH}
 
 # install netcdf c++
 cd ${PROGS}
-mkdir netcdf-cxx-${NCXX_VER}
-cd netcdf-cxx-${NCXX_VER}
-wget "ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-cxx-${NCXX_VER}.tar.gz"
-tar -zxvf netcdf-cxx-${NCXX_VER}.tar.gz > extract.log
-rm -f netcdf-cxx-${NCXX_VER}.tar.gz
-mv netcdf-cxx-${NCXX_VER} src
+mkdir netcdf-${NCXX_VER}
+cd netcdf-${NCXX_VER}
+wget "https://downloads.unidata.ucar.edu/netcdf-cxx/4.3.1/netcdf-cxx4-4.3.1.tar.gz"
+tar -zxvf netcdf-${NCXX_VER}.tar.gz > extract.log
+rm -f netcdf-${NCXX_VER}.tar.gz
+mkdir src
+mv netcdf-${NCXX_VER}/* !src src/
 cd src
-./configure --prefix=${PROGS}/netcdf-cxx-${NCXX_VER} CC=${CC} CXX=${CXX} LDFLAGS="-L${PROGS}/zlib-${ZLIB_VER}/lib -L${PROGS}/hdf5-${HDF5_VER}/lib -L${PROGS}/netcdf-${NCCC_VER}/lib" CPPFLAGS="-I${PROGS}/zlib-${ZLIB_VER}/include -I${PROGS}/hdf5-${HDF5_VER}/include -I${PROGS}/netcdf-${NCCC_VER}/include"
+./configure --prefix=${PROGS}/netcdf-${NCXX_VER} CC=${CC} CXX=${CXX} LDFLAGS="-L${PROGS}/zlib-${ZLIB_VER}/lib -L${PROGS}/hdf5-${HDF5_VER}/lib -L${PROGS}/netcdf-${NCCC_VER}/lib" CPPFLAGS="-I${PROGS}/zlib-${ZLIB_VER}/include -I${PROGS}/hdf5-${HDF5_VER}/include -I${PROGS}/netcdf-${NCCC_VER}/include"
 make > make.log
 make install >> make.log
 
@@ -96,15 +98,17 @@ cd ${PROGS}
 mkdir netcdf-fortran-${NCFC_VER}
 cd netcdf-fortran-${NCFC_VER}
 wget "ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-fortran-${NCFC_VER}.tar.gz"
+wget "https://downloads.unidata.ucar.edu/netcdf-fortran/4.6.1/netcdf-fortran-4.6.1.tar.gz"
 tar -zxvf netcdf-fortran-${NCFC_VER}.tar.gz > extract.log
 rm -f netcdf-fortran-${NCFC_VER}.tar.gz
-mv netcdf-fortran-${NCFC_VER} src 
+mkdir src
+mv netcdf-fortran-${NCFC_VER}/* !src src/ 
 cd src
 ./configure --prefix=${PROGS}/netcdf-fortran-${NCFC_VER} CC=${CC} FC=${FC} LDFLAGS="-L${PROGS}/zlib-${ZLIB_VER}/lib -L${PROGS}/hdf5-${HDF5_VER}/lib -L${PROGS}/netcdf-${NCCC_VER}/lib" CPPFLAGS="-I${PROGS}/zlib-${ZLIB_VER}/include -I${PROGS}/hdf5-${HDF5_VER}/include -I${PROGS}/netcdf-${NCCC_VER}/include"
 make > make.log
 make install >> make.log
 
-#link netcdf c++ and fortran to c
+link netcdf c++ and fortran to c
 cd ${PROGS}/netcdf-${NCCC_VER}/bin
 ln -s ../../netcdf-fortran-${NCFC_VER}/bin/* .
 cd ${PROGS}/netcdf-${NCCC_VER}/lib
