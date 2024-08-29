@@ -45,7 +45,9 @@
 > For example: mine was `cd /home/rippler/RegESM`
 
 **Step (6):** Run the Script by typing below
+
 **Recommended to use the Improved one with better protections and stuff**
+
     sudo ./Improved_install-deps.sh
     sudo ./install-deps.sh  
 
