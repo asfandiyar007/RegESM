@@ -63,12 +63,11 @@ export LD_LIBRARY_PATH=${HDF5}/lib:${LD_LIBRARY_PATH}
 
 # install netcdf c
 cd ${PROGS}
-mkdir netcdf-${NCCC_VER}
+mkdir -p netcdf-${NCCC_VER}
 cd netcdf-${NCCC_VER}
 wget "https://downloads.unidata.ucar.edu/netcdf-c/4.9.2/netcdf-${NCCC_VER}.tar.gz"
 tar -zxvf netcdf-${NCCC_VER}.tar.gz > extract.log
 rm -f netcdf-${NCCC_VER}.tar.gz
-mkdir src
 mv netcdf-${NCCC_VER} src
 cd src
 ./configure --prefix=${PROGS}/netcdf-${NCCC_VER} CC=${CC} FC=${FC} LDFLAGS="-L${PROGS}/zlib-${ZLIB_VER}/lib -L${PROGS}/hdf5-${HDF5_VER}/lib" CPPFLAGS="-I${PROGS}/zlib-${ZLIB_VER}/include -I${PROGS}/hdf5-${HDF5_VER}/include"
@@ -81,7 +80,7 @@ export LD_LIBRARY_PATH=${NETCDF}/lib:${LD_LIBRARY_PATH}
 
 # install netcdf c++
 cd ${PROGS}
-mkdir netcdf-${NCXX_VER}
+mkdir -p netcdf-${NCXX_VER}
 cd netcdf-${NCXX_VER}
 wget "https://downloads.unidata.ucar.edu/netcdf-cxx/4.3.1/netcdf-cxx4-4.3.1.tar.gz"
 tar -zxvf netcdf-${NCXX_VER}.tar.gz > extract.log
@@ -94,7 +93,7 @@ make install >> make.log
 
 # install netcdf fortran
 cd ${PROGS} 
-mkdir netcdf-fortran-${NCFC_VER}
+mkdir -p netcdf-fortran-${NCFC_VER}
 cd netcdf-fortran-${NCFC_VER}
 wget "https://downloads.unidata.ucar.edu/netcdf-fortran/4.6.1/netcdf-fortran-4.6.1.tar.gz"
 tar -zxvf netcdf-fortran-${NCFC_VER}.tar.gz > extract.log
