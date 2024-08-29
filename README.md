@@ -18,6 +18,7 @@
     sudo apt install build-essential
     sudo apt-get install manpages-dev
     sudo apt-get install gfortran
+    sudo apt install libcurl4-openssl-dev
 
 ----------------- **Installation Method Step by Step** ----------
 
