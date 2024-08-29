@@ -29,6 +29,7 @@
     git clone https://github.com/asfandiyar007/RegESM.git
     cd $PROGS
     cd RegESM
+    sudo chmod +x Improved_install-deps.sh
     sudo chmod +x install-deps.sh
 
 > If you don't know your username type this in terminal `whoami`
@@ -44,7 +45,8 @@
 > For example: mine was `cd /home/rippler/RegESM`
 
 **Step (6):** Run the Script by typing below
-
+**Recommended to use the Improved one with better protections and stuff**
+    sudo ./Improved_install-deps.sh
     sudo ./install-deps.sh  
 
 --------------------------------------------------------------
