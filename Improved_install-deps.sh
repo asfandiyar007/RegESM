@@ -30,12 +30,12 @@ check_dir "$PROGS"
 # parameters
 ZLIB_VER="1.2.8"
 HDF5_VER="1.8.16"
-NCCC_VER="c-4.9.2"
-NCXX_VER="cxx4-4.3.1"
+NCCC_VER="4.3.0"
+NCXX_VER="4.3.0"
 NCFC_VER="4.6.1"
 XERC_VER="3.2.5"
 OMPI_VER="1.10.2"
-ESMF_VER="7_0_0"
+ESMF_VER="7_0_2"
 
 # compilers
 CC=${CC:-gcc}
@@ -96,7 +96,7 @@ export LD_LIBRARY_PATH="${HDF5}/lib:${LD_LIBRARY_PATH}"
 check_dir "${PROGS}"
 mkdir -p "${PROGS}/netcdf-${NCCC_VER}"
 cd "${PROGS}/netcdf-${NCCC_VER}"
-download_and_extract "https://downloads.unidata.ucar.edu/netcdf-c/4.9.2/netcdf-${NCCC_VER}.tar.gz"
+download_and_extract "https://github.com/Unidata/netcdf-c/archive/refs/tags/netcdf-${NCCC_VER}.tar.gz"
 safe_move "netcdf-${NCCC_VER}" src
 cd src
 ./configure --prefix="${PROGS}/netcdf-${NCCC_VER}" CC="${CC}" FC="${FC}" \
@@ -113,7 +113,7 @@ export LD_LIBRARY_PATH="${NETCDF}/lib:${LD_LIBRARY_PATH}"
 check_dir "${PROGS}"
 mkdir -p "${PROGS}/netcdf-${NCXX_VER}"
 cd "${PROGS}/netcdf-${NCXX_VER}"
-download_and_extract "https://downloads.unidata.ucar.edu/netcdf-cxx/4.3.1/netcdf-cxx4-4.3.1.tar.gz"
+download_and_extract "https://github.com/Unidata/netcdf-cxx4/archive/refs/tags/v4.3.0.tar.gz"
 safe_move "netcdf-${NCXX_VER}" src
 cd src
 ./configure --prefix="${PROGS}/netcdf-${NCXX_VER}" CC="${CC}" CXX="${CXX}" \
